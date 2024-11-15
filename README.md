@@ -20,11 +20,14 @@ VOC拓展数据集的百度网盘如下：
 （数据集为.jpg格式，标签为.json格式，都放在一个文件夹里即可）  
 2、利用step1_seg_image_gen.py将数据集进行转换  
 （原始.jpg图像存在了JPEGImages中，分割好的.png格式图像存在SegmentationClass中）  
-3、将VOCdevkit/VOC2007中的JPEGImages和SegmentationClass替换成datasets中的datasets中的JPEGImages和SegmentationClass（复制替换即可）  
-4、利用step2_reset_tra_and_val.py将数据集随机按一定比例以.txt方式分成训练集和训练验证集存在Segmentation的train.txt、trainval.txt和val.txt中  
+3、将VOCdevkit/VOC2007中的JPEGImages和SegmentationClass  
+替换成datasets中的datasets中的JPEGImages和SegmentationClass（复制替换即可）  
+4、利用step2_reset_tra_and_val.py将数据集随机按一定比例以.txt方式  
+分成训练集和训练验证集存在Segmentation的train.txt、trainval.txt和val.txt中  
 （假设数据集1000，训练验证为8:2，则trainval=1000、train=800、val=200）    
 5、在train.py文件夹下面，选择自己要使用的主干模型和下采样因子。  
-本文提供的主干模型有mobilenet。下采样因子可以在8和16中选择。需要注意的是，预训练模型需要和主干模型相对应     
+本文提供的主干模型有mobilenet。下采样因子可以在8和16中选择。  
+需要注意的是，预训练模型需要和主干模型相对应     
 6、注意修改train.py的num_classes为分类个数+1，运行train.py即可开始训练  
 
 #### 预测
@@ -38,7 +41,8 @@ VOC拓展数据集的百度网盘如下：
 视频检测，可调用摄像头或者视频进行检测，详情查看注释。  
 测试fps，使用的图片是img里面的xxx.jpg，详情查看注释。  
 #### 注意事项  
-1.训练前仔细检查自己的格式是否满足要求，该库要求数据集格式为VOC格式，需要准备好的内容有输入图片和标签输入图片为.jpg图片，无需固定大小，传入训练前会自动进行resize。  
+1.训练前仔细检查自己的格式是否满足要求，该库要求数据集格式为VOC格式，  
+需要准备好的内容有输入图片和标签输入图片为.jpg图片，无需固定大小，传入训练前会自动进行resize。  
 2.如果格式有误，参考：https://github.com/bubbliiiing/segmentation-format-fix  
 3.训练好的权值文件保存在logs文件夹中，每个训练世代（Epoch）包含若干训练步长（Step），每个训练步长（Step）进行一次梯度下降。  
 4.训练分为两个阶段，分别是冻结阶段和解冻阶段。设置冻结阶段是为了满足机器性能不足的训练需求。
